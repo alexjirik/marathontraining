@@ -1,103 +1,88 @@
 import streamlit as st
 
-# Configure the page
-st.set_page_config(page_title="Marathon Training Plan", page_icon="🏃", layout="centered")
+# Set to "wide" mode so the calendar stretches horizontally across the screen
+st.set_page_config(page_title="Marathon Training Plan", page_icon="🏃", layout="wide")
 
-st.title("🏃 Custom Marathon Training Plan")
+st.title("📅 Weekly Training Calendar")
 st.markdown("Your hybrid marathon training plan focusing on injury prevention, Solidcore, and aerobic base building.")
 st.divider()
 
-# Monday
-st.header("Monday: Solidcore")
-st.info("💪 Core & Muscular Endurance (No Impact)")
-with st.expander("View Details"):
-    st.markdown("""
-    * **Workout:** Solidcore class
-    * **Focus:** Muscular endurance, core control, and pelvic stability. 
-    * **Note:** No running today. Protect your legs.
-    """)
-st.checkbox("Mark Monday Complete", key="mon")
+# Create a 7-column layout for the week
+days = st.columns(7)
+
+# --- MONDAY ---
+with days[0]:
+    st.subheader("Mon")
+    st.info("💪 Solidcore")
+    with st.expander("Workout Details"):
+        st.write("**Focus:** Core & Muscular Endurance")
+        st.write("No running today. Protect your legs and build that stability.")
+    st.checkbox("Complete", key="mon")
+
+# --- TUESDAY ---
+with days[1]:
+    st.subheader("Tue")
+    st.success("👟 3-4 mi Run")
+    with st.expander("Warm-Up (5 min)"):
+        st.write("• Leg Swings (10/leg)\n• Open Gate (10)\n• Toy Soldier (10/leg)\n• Hamstring Sweeps (8/leg)\n• Walking Lunges (10 total)\n• High Knees (20s)")
+    with st.expander("Run Details"):
+        st.write("**Pace:** Strictly conversational.")
+        st.write("**Cool Down:** Foam roll hip flexors & quads.")
+    st.checkbox("Complete", key="tue")
+
+# --- WEDNESDAY ---
+with days[2]:
+    st.subheader("Wed")
+    st.info("💪 Solidcore")
+    with st.expander("Workout Details"):
+        st.write("**Focus:** Deep core engagement.")
+        st.write("Fuel well today to prep your legs for tomorrow's run.")
+    st.checkbox("Complete", key="wed")
+
+# --- THURSDAY ---
+with days[3]:
+    st.subheader("Thu")
+    st.success("👟 4-5 mi Run")
+    with st.expander("Warm-Up (5 min)"):
+        st.write("Complete the same 6-move dynamic warm-up as Tuesday.")
+    with st.expander("Run Details"):
+        st.write("**Pace:** Strictly conversational.")
+    with st.expander("Post-Run Prehab"):
+        st.write("• Calf Raise (3x15)\n• Tibialis Raise (3x20)\n• Banded Walk (3x10/way)")
+    st.checkbox("Complete", key="thu")
+
+# --- FRIDAY ---
+with days[4]:
+    st.subheader("Fri")
+    st.warning("🚴 Aerobic Flush")
+    with st.expander("Workout Details"):
+        st.write("**Time:** 35–45 mins")
+        st.write("**Mode:** Cycling, Swimming, or Elliptical")
+        st.write("**Focus:** Zone 2 low-impact recovery. Push blood through the legs without joint impact.")
+    st.checkbox("Complete", key="fri")
+
+# --- SATURDAY ---
+with days[5]:
+    st.subheader("Sat")
+    st.error("🔥 Long Run")
+    with st.expander("Run Details"):
+        st.write("**Distance:** 6+ miles")
+        st.write("Start at 6 mi, add 1 mi every two weeks.")
+        st.write("Do your dynamic warm-up first. Stretch calves/hamstrings after.")
+    st.checkbox("Complete", key="sat")
+
+# --- SUNDAY ---
+with days[6]:
+    st.subheader("Sun")
+    st.markdown("💤 **Full Rest**")
+    with st.expander("Recovery Details"):
+        st.write("Full recovery today.")
+        st.write("Light walking or mobility is okay, but zero structured exercise. Let your body absorb the week's work.")
+    st.checkbox("Complete", key="sun")
+
 st.divider()
 
-# Tuesday
-st.header("Tuesday: Easy Run (3–4 miles)")
-st.success("👟 Easy Conversational Pace")
-with st.expander("Pre-Run Warm-Up (5 min)"):
-    st.markdown("""
-    * **Forward Leg Swings:** 10 reps per leg
-    * **Open the Gate:** 10 reps alternating
-    * **Toy Soldier Walk:** 10 steps per leg
-    * **Hamstring Sweeps:** 8 reps per leg
-    * **Walking Lunges:** 10 steps total
-    * **High Knees:** 20 seconds
-    """)
-with st.expander("Run Details & Cool Down"):
-    st.markdown("""
-    * **Run:** 3–4 miles at a strictly conversational, easy pace.
-    * **Cool Down:** 3–5 minutes foam rolling your hip flexors and quads (crucial after Monday's Solidcore).
-    """)
-st.checkbox("Mark Tuesday Complete", key="tue")
-st.divider()
-
-# Wednesday
-st.header("Wednesday: Solidcore")
-st.info("💪 Deep Core Engagement")
-with st.expander("View Details"):
-    st.markdown("""
-    * **Workout:** Solidcore class
-    * **Focus:** Deep core engagement. Fuel well today to prep your legs for tomorrow.
-    """)
-st.checkbox("Mark Wednesday Complete", key="wed")
-st.divider()
-
-# Thursday
-st.header("Thursday: Easy Run (4–5 miles) + Prehab")
-st.success("👟 Base Building + Tendon Health")
-with st.expander("Pre-Run Warm-Up (5 min)"):
-    st.markdown("Complete the same 6-move dynamic warm-up sequence as Tuesday.")
-with st.expander("Run Details"):
-    st.markdown("* **Run:** 4–5 miles at a strictly conversational pace.")
-with st.expander("Post-Run Lower Leg Prehab"):
-    st.markdown("""
-    * **Standing Calf Raise:** 3 sets x 12-15 reps
-    * **Tibialis Wall Raise:** 3 sets x 15-20 reps
-    * **Banded Monster Walk:** 3 sets x 10 steps each way
-    * **Cool Down:** 3–5 minutes foam rolling your hip flexors and quads.
-    """)
-st.checkbox("Mark Thursday Complete", key="thu")
-st.divider()
-
-# Friday
-st.header("Friday: Aerobic Flush")
-st.warning("🚴 Low-Impact Active Recovery")
-with st.expander("View Details"):
-    st.markdown("""
-    * **Workout:** 35–45 minutes of Cycling (85-95 RPM), Freestyle Swimming, or Elliptical.
-    * **Focus:** Keep resistance light. This is a Zone 2 "flush" session to push blood through your legs and clear metabolic waste without any joint impact.
-    """)
-st.checkbox("Mark Friday Complete", key="fri")
-st.divider()
-
-# Saturday
-st.header("Saturday: Long Run")
-st.error("🔥 Endurance Builder (6+ miles)")
-with st.expander("Run Details & Progression"):
-    st.markdown("""
-    * **Warm-up:** Complete the 6-move dynamic warm-up sequence before stepping onto the road.
-    * **Run:** Start at 6 miles. Add 1 mile every two weeks. Maintain an easy, breathable pace.
-    * **Cool Down:** Walk for 5-10 minutes immediately after, followed by gentle static stretching for calves, hamstrings, and quads.
-    """)
-st.checkbox("Mark Saturday Complete", key="sat")
-st.divider()
-
-# Sunday
-st.header("Sunday: Full Rest")
-st.markdown("💤 **Recovery Day**")
-with st.expander("View Details"):
-    st.markdown("""
-    * **Workout:** Complete rest.
-    * **Focus:** Light walking or gentle mobility work is fine, but zero structured exercise. Let your bones, tendons, and muscles absorb the week's training.
-    """)
-st.checkbox("Mark Sunday Complete", key="sun")
-
-st.balloons() if all([st.session_state.get(k, False) for k in ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]]) else None
+# Check if all days are marked complete to trigger balloons!
+if all([st.session_state.get(k, False) for k in ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]]):
+    st.success("🎉 Incredible job! You crushed the entire week of training!")
+    st.balloons(
