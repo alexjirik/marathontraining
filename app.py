@@ -85,4 +85,4 @@ st.divider()
 # Check if all days are marked complete to trigger balloons!
 if all([st.session_state.get(k, False) for k in ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]]):
     st.success("🎉 Incredible job! You crushed the entire week of training!")
-    st.balloons(
+    st.balloons()
